@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import Decoder, * as _ from "jsonous";
 import { Maybe } from "maybeasy";
 import { ok } from "resulty";
@@ -49,6 +49,7 @@ type Methods = "get" | "post" | "put" | "patch" | "delete";
 export function makeRequest<T>(
   url: string,
   method: "get",
+  body: null,
   serverDataDecoder: Decoder<T>
 ): Promise<T>;
 export function makeRequest<T>(
@@ -68,10 +69,16 @@ export async function makeRequest<T>(
   body: any,
   serverDataDecoder?: Decoder<T>
 ): Promise<T | void> {
+  console.info(`Start: ${method.toUpperCase()} ${url}`);
   const [maybeServerData, error] = await makeAndDecodeResponse(
     url,
     method,
     body
+  );
+  console.info(
+    `Finish: ${method.toUpperCase()} ${url} ${
+      maybeServerData ? maybeServerData : error.message
+    }`
   );
 
   if (maybeServerData === null) {
@@ -104,7 +111,11 @@ const makeAndDecodeResponse = async (
   body: any
 ): Promise<DecodeResult> => {
   try {
-    const { data: responseData } = await api({ url, method, data: body });
+    const requestConfig: AxiosRequestConfig = { url, method };
+    if (body) {
+      requestConfig.data = body;
+    }
+    const { data: responseData } = await api(requestConfig);
 
     return succeedResponseDecoder.decodeAny(responseData).cata<DecodeResult>({
       Ok: val => [val, { code: 0, message: "" }],

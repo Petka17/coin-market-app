@@ -1,69 +1,51 @@
-import axios from "axios";
 import { action, observable } from "mobx";
 import { createContext } from "react";
-import { FailedResponse } from "../common/types";
-
-const api = axios.create({
-  baseURL: "https://pro-api.coinmarketcap.com/v1/",
-  headers: { "X-CMC_PRO_API_KEY": "ca6486f0-9083-4cc3-883c-0fb44371c17d" }
-});
+import { Coin, Currency } from "../common/types";
+import { codeRequest } from "../api/coinListing";
 
 class CoinListStore {
-  @observable list: RootObject[] = [];
+  @observable list: Coin[] = [];
+  @observable error: string | null = null;
+  @observable showError: boolean = false;
+  @observable loading: boolean = false;
 
-  @observable error: FailedResponse | null = null;
-
-  page: number = 0;
+  @observable page: number = 0;
   perPage: number = 20;
   baseCurrency: Currency = "USD";
 
+  @action getNextPage() {
+    if (this.loading) return;
+    this.page += 1;
+    this.getData();
+  }
+
+  @action refresh() {
+    if (this.loading) return;
+    this.page = 0;
+    this.list = [];
+    this.getData();
+  }
+
   @action getData() {
-    api
-      .get("cryptocurrency/listings/latest", {
-        params: {
-          start: 1 + this.page * this.perPage,
-          limit: this.perPage,
-          convert: "USD"
-        }
+    if (this.loading) return;
+
+    this.loading = true;
+
+    codeRequest(this.page, this.perPage, this.baseCurrency)
+      .then(list => {
+        this.list = this.list.concat(list);
+        this.loading = false;
       })
-      .then(response => (this.list = response.data.data))
-      .catch(console.error);
+      .catch(e => {
+        this.loading = false;
+        this.error = e.message;
+        this.showError = true;
+      });
+  }
+
+  @action closeError() {
+    this.showError = false;
   }
 }
 
 export const CoinListStoreContext = createContext(new CoinListStore());
-
-// === TEMP SECTION ===
-
-type Currency = "USD" | "BTC";
-
-export interface RootObject {
-  id: number;
-  name: string;
-  symbol: string;
-  slug: string;
-  num_market_pairs: number;
-  date_added: string;
-  tags: string[];
-  max_supply: number | null;
-  circulating_supply: number;
-  total_supply: number;
-  platform?: any;
-  cmc_rank: number;
-  last_updated: string;
-  quote: Quote;
-}
-
-export interface Quote {
-  USD: USD;
-}
-
-export interface USD {
-  price: number;
-  volume_24h: number;
-  percent_change_1h: number;
-  percent_change_24h: number;
-  percent_change_7d: number;
-  market_cap: number;
-  last_updated: string;
-}

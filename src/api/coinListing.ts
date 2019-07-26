@@ -5,7 +5,7 @@ import { Currency, Coin } from "../common/types";
 /**
  * Get Coins List
  */
-export const coinListUrl = (
+const coinListUrl = (
   page: number,
   perPage: number,
   baseCurrency: Currency
@@ -13,7 +13,7 @@ export const coinListUrl = (
   `cryptocurrency/listings/latest?start=${1 +
     page * perPage}&limit=${perPage}&convert=${baseCurrency}`;
 
-export const coinListDecoder = (baseCurrency: Currency): Decoder<Coin[]> =>
+const coinListDecoder = (baseCurrency: Currency): Decoder<Coin[]> =>
   _.array(
     _.succeed({})
       .assign("id", _.field("id", _.number))
@@ -34,6 +34,7 @@ export const codeRequest = (
   makeRequest(
     coinListUrl(page, perPage, baseCurrency),
     "get",
+    null,
     coinListDecoder(baseCurrency)
   );
 

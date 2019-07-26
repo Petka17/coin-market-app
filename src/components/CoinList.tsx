@@ -7,6 +7,7 @@ import { CoinListStoreContext } from "../state/CoinList";
 // TODO: Add response decoders
 // TODO: Load Coins from the server (pagination)
 // TODO: Refresh list
+// TODO: Show error
 // TODO: Apply colorscheme
 // TODO: Based on sign of change use different color: green on positive and red on Negative
 // TODO: Click on coin: open coin profile

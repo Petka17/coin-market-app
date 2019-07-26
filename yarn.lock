@@ -3892,6 +3892,15 @@ jsonify@~0.0.0:
   resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
   integrity sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=
 
+jsonous@^3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/jsonous/-/jsonous-3.3.3.tgz#46388e732b44cbb3de6f6aa48719367a178a4ad6"
+  integrity sha512-EEtvEtytYgxEe2IngumrP1hJALZnhZ412SGkUXJqdj1qsKRn7UKd+k1Wu6mqG0UbmKMu5ewRiBuoDvCwX1/eFg==
+  dependencies:
+    maybeasy "^2.0.1"
+    resulty "^2.2.0"
+    weakset "^1.0.0"
+
 jsprim@^1.2.2:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/jsprim/-/jsprim-1.4.1.tgz#313e66bc1e5cc06e438bc1b7499c2e5c56acb6a2"
@@ -4102,6 +4111,11 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
+
+maybeasy@^2.0.1, maybeasy@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/maybeasy/-/maybeasy-2.5.0.tgz#633ed6abf4ece0b276981357c039376d633a8d83"
+  integrity sha512-H9AJnBR/Qzh7/oTFjQAx62gw1p0CI88R3uF5zQrktLZ9VvSVXZsTk4GCntcKwKFjMGpv8VLfodWJCsLNYAUFUg==
 
 mem@^1.1.0:
   version "1.1.0"
@@ -5556,6 +5570,11 @@ restore-cursor@^2.0.0:
     onetime "^2.0.0"
     signal-exit "^3.0.2"
 
+resulty@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/resulty/-/resulty-2.2.0.tgz#5be6b975ba36faa4cb4753bd62ffa620b1c6edce"
+  integrity sha512-hb2qC0Ad2+fcFkO4VCbhGzuj/pRs1zRpUbjxT+jinbmAhV4AiM4mJzzmbUPh3pc7GxffHggWp3IeJiXpqOPDvA==
+
 ret@~0.1.10:
   version "0.1.15"
   resolved "https://registry.yarnpkg.com/ret/-/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
@@ -6435,6 +6454,11 @@ wcwidth@^1.0.1:
   integrity sha1-8LDc+RW8X/FSivrbLA4XtTLaL+g=
   dependencies:
     defaults "^1.0.3"
+
+weakset@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/weakset/-/weakset-1.0.0.tgz#7d525ebb93b24d38e6d0a19b0f3e14f099a3b270"
+  integrity sha1-fVJeu5OyTTjm0KGbDz4U8JmjsnA=
 
 webidl-conversions@^4.0.2:
   version "4.0.2"

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { action, observable } from "mobx";
 import { createContext } from "react";
+import { FailedResponse } from "../common/types";
 
 const api = axios.create({
   baseURL: "https://pro-api.coinmarketcap.com/v1/",
@@ -9,6 +10,8 @@ const api = axios.create({
 
 class CoinListStore {
   @observable list: RootObject[] = [];
+
+  @observable error: FailedResponse | null = null;
 
   page: number = 0;
   perPage: number = 20;

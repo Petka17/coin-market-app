@@ -6,19 +6,6 @@ import { CoinListStoreContext } from "../state/CoinList";
 import CoinRow from "./CoinRow";
 import ErrorPopup from "./ErrorPopup";
 
-// TODO: Strict Typescript
-
-// TODO: Add tests with react-native-testing-library
-
-// TODO: Show coins Icons
-// TODO: Switch base currency (default: USD)
-// TODO: Refresh Button in the header?
-// TODO: Click on coin: open coin profile
-
-// TODO: Run on iOS: there is a problem with ios simulator
-
-// TODO: refactor make request: return Result, stop throwing errors
-
 /**
  * The main component
  *
@@ -27,7 +14,7 @@ import ErrorPopup from "./ErrorPopup";
  * Came across with the problem when tried to pass mobx stor actions
  * directly to FlatList component props. In order to make it work
  * used inline arrow function, which is not good practice.
- * It's
+ * It's good candidate for future refactoring.
  */
 const CoinList = observer(() => {
   const coinListStore = useContext(CoinListStoreContext);

@@ -1,6 +1,7 @@
-import Decoder, * as _ from "jsonous";
+import * as _ from "jsonous";
+
+import { Coin, Currency } from "../common/types";
 import { makeRequest } from "./makeRequest";
-import { Currency, Coin } from "../common/types";
 
 /**
  * Get Coins List
@@ -26,7 +27,13 @@ const coinListDecoder = (baseCurrency: Currency): Decoder<Coin[]> =>
       )
   );
 
-export const codeRequest = (
+/**
+ *
+ * @param page number
+ * @param perPage number of elements per request
+ * @param baseCurrency currency for price fields in response
+ */
+export const coinsRequest = (
   page: number,
   perPage: number,
   baseCurrency: Currency = "USD"
@@ -39,6 +46,7 @@ export const codeRequest = (
   );
 
 /**
+ * Response example:
  * [
     {
       "id": 1,

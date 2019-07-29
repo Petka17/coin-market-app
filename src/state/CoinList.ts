@@ -1,7 +1,8 @@
 import { action, observable } from "mobx";
 import { createContext } from "react";
+
+import { coinsRequest } from "../api/coinListing";
 import { Coin, Currency } from "../common/types";
-import { codeRequest } from "../api/coinListing";
 
 class CoinListStore {
   @observable list: Coin[] = [];
@@ -31,7 +32,7 @@ class CoinListStore {
 
     this.loading = true;
 
-    codeRequest(this.page, this.perPage, this.baseCurrency)
+    coinsRequest(this.page, this.perPage, this.baseCurrency)
       .then(list => {
         this.list = this.list.concat(list);
         this.loading = false;

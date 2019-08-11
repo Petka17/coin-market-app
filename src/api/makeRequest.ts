@@ -1,13 +1,11 @@
-import axios, { AxiosError, AxiosRequestConfig } from "axios";
-import Decoder, * as _ from "jsonous";
+import { AxiosError, AxiosRequestConfig } from "axios";
+import * as _ from "jsonous";
+import Decoder from "jsonous";
 import { Maybe } from "maybeasy";
 import { ok } from "resulty";
-import { FailedResponse } from "../common/types";
 
-const api = axios.create({
-  baseURL: "https://pro-api.coinmarketcap.com/v1/",
-  headers: { "X-CMC_PRO_API_KEY": "ca6486f0-9083-4cc3-883c-0fb44371c17d" }
-});
+import { FailedResponse } from "../common/types";
+import { api } from "./adapter";
 
 /**
  * Custom Decoders

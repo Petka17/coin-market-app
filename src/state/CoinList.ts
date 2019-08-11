@@ -1,10 +1,10 @@
-import { action, observable } from "mobx";
+import { action, computed, observable } from "mobx";
 import { createContext } from "react";
 
 import { coinsRequest } from "../api/coinListing";
 import { Coin, Currency } from "../common/types";
 
-class CoinListStore {
+export class CoinListStore {
   @observable list: Coin[] = [];
   @observable error: string | null = null;
   @observable showError: boolean = false;
@@ -13,6 +13,10 @@ class CoinListStore {
   @observable page: number = 0;
   perPage: number = 20;
   baseCurrency: Currency = "USD";
+
+  @computed get list2() {
+    return this.list;
+  }
 
   @action getNextPage() {
     if (this.loading) return;

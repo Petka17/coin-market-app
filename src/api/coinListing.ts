@@ -1,4 +1,5 @@
 import * as _ from "jsonous";
+import Decoder from "jsonous";
 
 import { Coin, Currency } from "../common/types";
 import { makeRequest } from "./makeRequest";
